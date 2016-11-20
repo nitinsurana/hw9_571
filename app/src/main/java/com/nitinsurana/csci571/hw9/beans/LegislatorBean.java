@@ -1,10 +1,16 @@
 package com.nitinsurana.csci571.hw9.beans;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.util.Date;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Created by coding_idiot on 19/11/16.
@@ -13,8 +19,23 @@ import lombok.Data;
 @Data
 public class LegislatorBean implements Serializable {
     private String bioguide_id, chamber, first_name, last_name;
-    private String party;
+    private String party, oc_email;
     private String state_name, district;
+    private String twitter_id, facebook_id, website;
+
+    private String phone;
+
+    //    @Getter
+//    @Setter(AccessLevel.NONE)
+    private Date term_start, term_end;
+
+    public void setTerm_start(String term_start) throws ParseException {
+        this.term_start = DateUtils.parseDate(term_start, "YYYY-MM-DD");
+    }
+
+    public void setTerm_end(String term_end) throws ParseException {
+        this.term_end = DateUtils.parseDate(term_end, "YYYY-MM-DD");
+    }
 
     public String getFullname() {
         return last_name + ", " + first_name;
