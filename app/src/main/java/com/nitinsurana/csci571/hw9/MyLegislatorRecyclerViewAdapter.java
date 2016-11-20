@@ -16,15 +16,15 @@ import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link LegislatorBean} and makes a call to the
- * specified {@link LegislatorFragment.OnLegListFragmentInteractionListener}.
+ * specified {@link LegislatorFragment.OnFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyLegislatorRecyclerViewAdapter extends RecyclerView.Adapter<MyLegislatorRecyclerViewAdapter.ViewHolder> {
 
     private final List<LegislatorBean> mValues;
-    private final LegislatorFragment.OnLegListFragmentInteractionListener mListener;
+    private final LegislatorFragment.OnFragmentInteractionListener mListener;
 
-    public MyLegislatorRecyclerViewAdapter(ArrayList<LegislatorBean> items, LegislatorFragment.OnLegListFragmentInteractionListener listener) {
+    public MyLegislatorRecyclerViewAdapter(ArrayList<LegislatorBean> items, LegislatorFragment.OnFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -45,8 +45,8 @@ public class MyLegislatorRecyclerViewAdapter extends RecyclerView.Adapter<MyLegi
         holder.mDistrictView.setText(mValues.get(position).getDistrict());
         Picasso.with(holder.mImageView.getContext())
                 .load(mValues.get(position).getImageUrl())
-                .resize(100, 150)
-                .centerCrop()
+//                .resize(100, 150)
+//                .centerCrop()
                 .into(holder.mImageView);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +55,7 @@ public class MyLegislatorRecyclerViewAdapter extends RecyclerView.Adapter<MyLegi
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.OnLegListFragmentInteractionListener(holder.mItem);
+                    mListener.OnFragmentInteractionListener(holder.mItem);
                 }
             }
         });

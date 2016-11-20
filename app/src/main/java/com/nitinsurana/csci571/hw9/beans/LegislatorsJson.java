@@ -49,6 +49,12 @@ public class LegislatorsJson {
                 hlist.add(lb);
             }
         }
+        Collections.sort(hlist, new Comparator<LegislatorBean>() {
+            @Override
+            public int compare(LegislatorBean o1, LegislatorBean o2) {
+                return o1.getLast_name().compareTo(o2.getLast_name());
+            }
+        });
         return hlist;
     }
 
@@ -59,6 +65,12 @@ public class LegislatorsJson {
                 lst.add(lb);
             }
         }
+        Collections.sort(lst, new Comparator<LegislatorBean>() {
+            @Override
+            public int compare(LegislatorBean o1, LegislatorBean o2) {
+                return o1.getLast_name().compareTo(o2.getLast_name());
+            }
+        });
         return lst;
     }
 }

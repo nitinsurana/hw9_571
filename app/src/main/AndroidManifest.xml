@@ -24,10 +24,6 @@
         <activity android:name=".LegislatorDetailActivity"
             android:label="@string/legislator_info"
             android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.nitinsurana.csci571.hw9.NavigationDrawerActivity" />
         </activity>
     </application>
-
 </manifest>

@@ -3,28 +3,46 @@ package com.nitinsurana.csci571.hw9;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nitinsurana.csci571.hw9.beans.LegislatorBean;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
+import java.util.Stack;
+
 public class LegislatorDetailActivity extends AppCompatActivity {
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private LegislatorBean bean;
+    public static Stack<Class<?>> parents = new Stack<Class<?>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        parents.push(getClass());
         setContentView(R.layout.activity_legislator_detail);
+
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
@@ -34,38 +52,24 @@ public class LegislatorDetailActivity extends AppCompatActivity {
         // To retrieve object in second Activity
         bean = (LegislatorBean) getIntent().getSerializableExtra("legislator");
 
-        if (StringUtils.isBlank(bean.getFacebook_id())) {
-            ImageView i = (ImageView) findViewById(R.id.social_f);
-            i.setVisibility(View.INVISIBLE);
-        }
-        if (StringUtils.isBlank(bean.getTwitter_id())) {
-            ImageView i = (ImageView) findViewById(R.id.social_t);
-            i.setVisibility(View.INVISIBLE);
-        }
-        if (StringUtils.isBlank(bean.getWebsite())) {
-            ImageView i = (ImageView) findViewById(R.id.social_w);
-            i.setVisibility(View.INVISIBLE);
+        ImageView img = (ImageView) findViewById(R.id.party_img);
+        TextView txt = (TextView) findViewById(R.id.party_title);
+        if (bean.getParty().equalsIgnoreCase("r")) {
+            Picasso.with(img.getContext()).load(R.drawable.r).resize(30, 30).into(img);
+            txt.setText(" Republican");
+        } else if (bean.getParty().equalsIgnoreCase("d")) {
+            Picasso.with(img.getContext()).load(R.drawable.d).resize(30, 30).into(img);
+            txt.setText(" Democrat");
+        } else {
+            Picasso.with(img.getContext()).load(R.drawable.i).resize(30, 30).into(img);
+            txt.setText(" Independent");
         }
 
-        ImageView img = (ImageView) findViewById(R.id.img);
+        img = (ImageView) findViewById(R.id.img);
         Picasso.with(img.getContext())
                 .load(bean.getImageUrl())
                 .resize(180, 200)
-                .centerCrop()
                 .into(img);
-
-        img = (ImageView) findViewById(R.id.party_img);
-        TextView txt = (TextView) findViewById(R.id.party_title);
-        if (bean.getParty().equalsIgnoreCase("r")) {
-            Picasso.with(img.getContext()).load(R.drawable.r).resize(30,30).into(img);
-            txt.setText(" Republican");
-        } else if (bean.getParty().equalsIgnoreCase("d")) {
-            Picasso.with(img.getContext()).load(R.drawable.d).resize(30,30).into(img);
-            txt.setText(" Democrat");
-        } else {
-            Picasso.with(img.getContext()).load(R.drawable.i).resize(30,30).into(img);
-            txt.setText(" Independent");
-        }
 
         TextView name = (TextView) findViewById(R.id.name);
         name.setText(bean.getFullname());
@@ -89,20 +93,32 @@ public class LegislatorDetailActivity extends AppCompatActivity {
     }
 
     public void openFacebook(View w) {
-        Uri uri = Uri.parse("https://www.facebook.com/" + bean.getFacebook_id());       // missing 'http://' will cause crash
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
+        if (StringUtils.isBlank(bean.getFacebook_id())) {
+            Toast.makeText(getApplicationContext(), "Facebook is not available for this legislator", Toast.LENGTH_SHORT).show();
+        } else {
+            Uri uri = Uri.parse("https://www.facebook.com/" + bean.getFacebook_id());       // missing 'http://' will cause crash
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        }
     }
 
     public void openWebsite(View w) {
-        Uri uri = Uri.parse(bean.getWebsite());
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
+        if (StringUtils.isBlank(bean.getWebsite())) {
+            Toast.makeText(getApplicationContext(), "Website is not available for this legislator", Toast.LENGTH_SHORT).show();
+        } else {
+            Uri uri = Uri.parse(bean.getWebsite());
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        }
     }
 
     public void openTwitter(View w) {
-        Uri uri = Uri.parse("https://www.twitter.com/" + bean.getFacebook_id());
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
+        if (StringUtils.isBlank(bean.getTwitter_id())) {
+            Toast.makeText(getApplicationContext(), "Twitter is not available for this legislator", Toast.LENGTH_SHORT).show();
+        } else {
+            Uri uri = Uri.parse("https://www.twitter.com/" + bean.getFacebook_id());
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        }
     }
 }
