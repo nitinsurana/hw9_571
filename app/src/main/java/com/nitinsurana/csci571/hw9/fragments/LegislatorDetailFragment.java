@@ -8,12 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nitinsurana.csci571.hw9.FavoriteDAO;
 import com.nitinsurana.csci571.hw9.R;
 import com.nitinsurana.csci571.hw9.beans.LegislatorBean;
-import com.nitinsurana.csci571.hw9.components.CustomProgress;
 import com.squareup.picasso.Picasso;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -116,11 +116,12 @@ public class LegislatorDetailFragment extends Fragment {
         term = DateFormatUtils.format(bean.getTerm_end(), "MMM dd, yyyy");
         txt.setText(term);
 
-        float t = (float) (1.0 * new Date().getTime() - bean.getTerm_start().getTime() / (1.0 * bean.getTerm_end().getTime() - bean.getTerm_start().getTime()) * 100);
-        CustomProgress progressBar = (CustomProgress) view.findViewById(R.id.term);
-        progressBar.setMaximumPercentage(t);
-//        progressBar.setText(t + " %");
-        progressBar.setShowingPercentage(true);
+        float t = (float) ((1.0 * new Date().getTime() - bean.getTerm_start().getTime()) / (1.0 * bean.getTerm_end().getTime() - bean.getTerm_start().getTime()));
+        ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.term);
+        progressBar.setProgress((int) (t * 100));
+
+        txt = (TextView) view.findViewById(R.id.term_txt);
+        txt.setText((int)( t * 100) + "%               ");
 
         txt = (TextView) view.findViewById(R.id.office);
         txt.setText(bean.getOffice());
@@ -167,7 +168,7 @@ public class LegislatorDetailFragment extends Fragment {
         mListener = null;
     }
 
-    public void toggleFavorite(View view){
+    public void toggleFavorite(View view) {
         ImageView img = (ImageView) view.findViewById(R.id.fav);
         if (FavoriteDAO.legislatorBeanMap.get(bean.getBioguide_id()) == null) {
             FavoriteDAO.legislatorBeanMap.put(bean.getBioguide_id(), bean);

@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="progressBarForeground">#F0A84F</color>
     <color name="progressBarBackground">#827A6A</color>
+    <color name="tabWidgetBackground">#3C3B3C</color>
 </resources>

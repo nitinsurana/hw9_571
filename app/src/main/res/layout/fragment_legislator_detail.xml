@@ -19,8 +19,8 @@
                 android:id="@+id/social_layout"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="100dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginLeft="100dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
@@ -261,12 +261,21 @@
                             android:text="Term:"
                             android:textStyle="bold" />
 
-                        <com.nitinsurana.csci571.hw9.components.CustomProgress
+                        <ProgressBar
                             android:id="@+id/term"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
+                            style="@android:style/Widget.ProgressBar.Horizontal"
+                            android:layout_width="150dp"
+                            android:layout_height="30dp"
+                            android:foreground="@color/progressBarForeground"
                             android:layout_alignParentRight="true"
-                            android:layout_centerHorizontal="true" />
+                            android:max="100" />
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:id="@+id/term_txt"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
                     </RelativeLayout>
                 </LinearLayout>
 

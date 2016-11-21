@@ -14,6 +14,9 @@ import com.nitinsurana.csci571.hw9.R;
 import com.nitinsurana.csci571.hw9.beans.CommitteeBean;
 import com.squareup.picasso.Picasso;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.WordUtils;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,15 +75,25 @@ public class CommitteeDetailFragment extends Fragment {
         txt.setText(bean.getName());
 
         txt = (TextView) view.findViewById(R.id.chamber);
-        txt.setText(bean.getChamber());
+        txt.setText(WordUtils.capitalize(bean.getChamber()));
+
+        ImageView img = (ImageView) view.findViewById(R.id.chamber_img);
+        if (bean.getChamber().equalsIgnoreCase("house")) {
+            Picasso.with(img.getContext()).load(R.drawable.h).into(img);
+        } else {
+            Picasso.with(img.getContext()).load(R.drawable.senate).into(img);
+        }
 
         txt = (TextView) view.findViewById(R.id.parent_committee);
-        txt.setText(bean.getParent_committee_id());
+        txt.setText(bean.getParent_committee_id() != null ? bean.getParent_committee_id() : "N.A.");
 
         txt = (TextView) view.findViewById(R.id.contact);
-        txt.setText(bean.getPhone());
+        txt.setText(bean.getPhone() != null ? bean.getPhone() : "N.A.");
 
-        ImageView img = (ImageView) view.findViewById(R.id.fav);
+        txt = (TextView) view.findViewById(R.id.office);
+        txt.setText(bean.getOffice());
+
+        img = (ImageView) view.findViewById(R.id.fav);
         if (FavoriteDAO.committeeBeanMap.get(bean.getCommittee_id()) != null) {
             Picasso.with(img.getContext()).load(R.drawable.ss).into(img);
         }
