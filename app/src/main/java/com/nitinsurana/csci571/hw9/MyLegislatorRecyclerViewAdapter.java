@@ -8,23 +8,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nitinsurana.csci571.hw9.beans.LegislatorBean;
+import com.nitinsurana.csci571.hw9.fragments.LegislatorFragment;
+import com.nitinsurana.csci571.hw9.fragments.OnFragmentInteractionListener;
 import com.squareup.picasso.Picasso;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link LegislatorBean} and makes a call to the
- * specified {@link LegislatorFragment.OnFragmentInteractionListener}.
+ * specified {@link OnFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyLegislatorRecyclerViewAdapter extends RecyclerView.Adapter<MyLegislatorRecyclerViewAdapter.ViewHolder> {
 
     private final List<LegislatorBean> mValues;
-    private final LegislatorFragment.OnFragmentInteractionListener mListener;
+    private final OnFragmentInteractionListener mListener;
 
-    public MyLegislatorRecyclerViewAdapter(ArrayList<LegislatorBean> items, LegislatorFragment.OnFragmentInteractionListener listener) {
+    public MyLegislatorRecyclerViewAdapter(ArrayList<LegislatorBean> items, OnFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -32,7 +33,7 @@ public class MyLegislatorRecyclerViewAdapter extends RecyclerView.Adapter<MyLegi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_legislator, parent, false);
+                .inflate(R.layout.fragment_legislator_list_item, parent, false);
         return new ViewHolder(view);
     }
 

@@ -1,16 +1,8 @@
-package com.nitinsurana.csci571.hw9;
+package com.nitinsurana.csci571.hw9.activities;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.TaskStackBuilder;
-import android.support.v7.app.NotificationCompat;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -20,18 +12,27 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.nitinsurana.csci571.hw9.beans.LegislatorBean;
+import com.nitinsurana.csci571.hw9.R;
+import com.nitinsurana.csci571.hw9.beans.Bean;
+import com.nitinsurana.csci571.hw9.fragments.BillFragment;
+import com.nitinsurana.csci571.hw9.fragments.LegislatorFragment;
+import com.nitinsurana.csci571.hw9.fragments.OnFragmentInteractionListener;
+import com.squareup.picasso.OkHttpDownloader;
+import com.squareup.picasso.Picasso;
 
-import java.util.Date;
+//import okhttp3.OkHttpClient;
 
 
-public class NavigationDrawerActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, LegislatorFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, OnFragmentInteractionListener {
+
+//    public static Picasso picasso;
+//    public static OkHttpClient okHttpClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_navigation_drawer);
+        setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -95,12 +96,14 @@ public class NavigationDrawerActivity extends AppCompatActivity
                     .replace(R.id.fragment_container, new BillFragment(), "BillFragment")
 //                    .addToBackStack("backStackStateName")
                     .commit();
+            setTitle("Bills");
         } else if (id == R.id.nav_legislators) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, new LegislatorFragment(), "LegislatorFragment")
 //                    .addToBackStack("backStackStateName")
                     .commit();
+            setTitle("Legislators");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -109,9 +112,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
     }
 
     @Override
-    public void OnFragmentInteractionListener(LegislatorBean item) {
-        Intent intent = new Intent(this, LegislatorDetailActivity.class);
-        intent.putExtra("legislator", item);
+    public void OnFragmentInteractionListener(Bean item) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("bean", item);
         startActivity(intent);
     }
 }

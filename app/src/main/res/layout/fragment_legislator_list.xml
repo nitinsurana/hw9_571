@@ -47,8 +47,8 @@
                             android:layout_marginRight="16dp"
                             android:layout_weight="1"
                             app:layoutManager="LinearLayoutManager"
-                            tools:context="com.nitinsurana.csci571.hw9.LegislatorFragment"
-                            tools:listitem="@layout/fragment_legislator" />
+                            tools:context="com.nitinsurana.csci571.hw9.fragments.LegislatorFragment"
+                            tools:listitem="@layout/fragment_legislator_list_item" />
 
                         <LinearLayout
                             android:id="@+id/state_side_index"
@@ -82,8 +82,8 @@
                             android:layout_marginRight="16dp"
                             android:layout_weight="1"
                             app:layoutManager="LinearLayoutManager"
-                            tools:context="com.nitinsurana.csci571.hw9.LegislatorFragment"
-                            tools:listitem="@layout/fragment_legislator" />
+                            tools:context="com.nitinsurana.csci571.hw9.fragments.LegislatorFragment"
+                            tools:listitem="@layout/fragment_legislator_list_item" />
 
                         <LinearLayout
                             android:id="@+id/house_side_index"
@@ -117,8 +117,8 @@
                             android:layout_marginRight="16dp"
                             android:layout_weight="1"
                             app:layoutManager="LinearLayoutManager"
-                            tools:context="com.nitinsurana.csci571.hw9.LegislatorFragment"
-                            tools:listitem="@layout/fragment_legislator" />
+                            tools:context="com.nitinsurana.csci571.hw9.fragments.LegislatorFragment"
+                            tools:listitem="@layout/fragment_legislator_list_item" />
 
                         <LinearLayout
                             android:id="@+id/senate_side_index"

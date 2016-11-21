@@ -1,29 +1,27 @@
-package com.nitinsurana.csci571.hw9;
+package com.nitinsurana.csci571.hw9.activities;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nitinsurana.csci571.hw9.fragments.BillDetailFragment;
+import com.nitinsurana.csci571.hw9.fragments.LegislatorDetailFragment;
+import com.nitinsurana.csci571.hw9.R;
+import com.nitinsurana.csci571.hw9.beans.Bean;
+import com.nitinsurana.csci571.hw9.beans.BillBean;
 import com.nitinsurana.csci571.hw9.beans.LegislatorBean;
-import com.squareup.picasso.NetworkPolicy;
-import com.squareup.picasso.Picasso;
+import com.nitinsurana.csci571.hw9.fragments.OnFragmentInteractionListener;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.Stack;
 
-public class LegislatorDetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements OnFragmentInteractionListener {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -34,65 +32,53 @@ public class LegislatorDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private LegislatorBean bean;
+    private Bean bean;
     public static Stack<Class<?>> parents = new Stack<Class<?>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         parents.push(getClass());
-        setContentView(R.layout.activity_legislator_detail);
-
+        setContentView(R.layout.activity_detail);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
         // Enable the Up button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // To retrieve object in second Activity
-        bean = (LegislatorBean) getIntent().getSerializableExtra("legislator");
-
-        ImageView img = (ImageView) findViewById(R.id.party_img);
-        TextView txt = (TextView) findViewById(R.id.party_title);
-        if (bean.getParty().equalsIgnoreCase("r")) {
-            Picasso.with(img.getContext()).load(R.drawable.r).resize(30, 30).into(img);
-            txt.setText(" Republican");
-        } else if (bean.getParty().equalsIgnoreCase("d")) {
-            Picasso.with(img.getContext()).load(R.drawable.d).resize(30, 30).into(img);
-            txt.setText(" Democrat");
-        } else {
-            Picasso.with(img.getContext()).load(R.drawable.i).resize(30, 30).into(img);
-            txt.setText(" Independent");
+        bean = (Bean) getIntent().getSerializableExtra("bean");
+        if (bean instanceof LegislatorBean) {
+            showLegislatorInfo();
+        } else if (bean instanceof BillBean) {
+            showBillInfo();
         }
+    }
 
-        img = (ImageView) findViewById(R.id.img);
-        Picasso.with(img.getContext())
-                .load(bean.getImageUrl())
-                .resize(180, 200)
-                .into(img);
+    public void showBillInfo() {
+        setTitle("Bill Info");
 
-        TextView name = (TextView) findViewById(R.id.name);
-        name.setText(bean.getFullname());
+        BillBean bean = (BillBean) this.bean;
 
-        txt = (TextView) findViewById(R.id.email);
-        txt.setText(bean.getOc_email());
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, BillDetailFragment.newInstance(bean),"BillDetailFragment")
+                .disallowAddToBackStack()
+                .commit();
+    }
 
-        txt = (TextView) findViewById(R.id.chamber);
-        txt.setText(bean.getChamber());
+    public void showLegislatorInfo() {
+        setTitle("Legislator Info");
 
-        txt = (TextView) findViewById(R.id.contact);
-        txt.setText(bean.getPhone());
+        LegislatorBean bean = (LegislatorBean) this.bean;
 
-        txt = (TextView) findViewById(R.id.start_term);
-        String term = DateFormatUtils.format(bean.getTerm_start(), "MMM dd, yyyy");
-        txt.setText(term);
-
-        txt = (TextView) findViewById(R.id.end_term);
-        term = DateFormatUtils.format(bean.getTerm_end(), "MMM dd, yyyy");
-        txt.setText(term);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.fragment_container, LegislatorDetailFragment.newInstance(bean), "LegislatorDetailFragment")
+                .disallowAddToBackStack()
+                .commit();
     }
 
     public void openFacebook(View w) {
+        LegislatorBean bean = (LegislatorBean) this.bean;
         if (StringUtils.isBlank(bean.getFacebook_id())) {
             Toast.makeText(getApplicationContext(), "Facebook is not available for this legislator", Toast.LENGTH_SHORT).show();
         } else {
@@ -103,6 +89,7 @@ public class LegislatorDetailActivity extends AppCompatActivity {
     }
 
     public void openWebsite(View w) {
+        LegislatorBean bean = (LegislatorBean) this.bean;
         if (StringUtils.isBlank(bean.getWebsite())) {
             Toast.makeText(getApplicationContext(), "Website is not available for this legislator", Toast.LENGTH_SHORT).show();
         } else {
@@ -113,6 +100,7 @@ public class LegislatorDetailActivity extends AppCompatActivity {
     }
 
     public void openTwitter(View w) {
+        LegislatorBean bean = (LegislatorBean) this.bean;
         if (StringUtils.isBlank(bean.getTwitter_id())) {
             Toast.makeText(getApplicationContext(), "Twitter is not available for this legislator", Toast.LENGTH_SHORT).show();
         } else {
@@ -120,5 +108,10 @@ public class LegislatorDetailActivity extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void OnFragmentInteractionListener(Bean item) {
+
     }
 }

@@ -17,17 +17,21 @@ import lombok.Setter;
  */
 
 @Data
-public class LegislatorBean implements Serializable {
+public class LegislatorBean extends Bean implements Serializable {
     private String bioguide_id, chamber, first_name, last_name;
-    private String party, oc_email;
+    private String party, oc_email, title;
     private String state_name, district;
     private String twitter_id, facebook_id, website;
 
-    private String phone;
+    private String phone, office, fax, state;
 
     //    @Getter
 //    @Setter(AccessLevel.NONE)
-    private Date term_start, term_end;
+    private Date term_start, term_end, birthday;
+
+    public void setBirthday(String birthday) throws ParseException {
+        this.birthday = DateUtils.parseDate(birthday, "YYYY-MM-DD");
+    }
 
     public void setTerm_start(String term_start) throws ParseException {
         this.term_start = DateUtils.parseDate(term_start, "YYYY-MM-DD");

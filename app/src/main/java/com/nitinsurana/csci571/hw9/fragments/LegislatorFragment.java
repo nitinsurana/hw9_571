@@ -1,4 +1,4 @@
-package com.nitinsurana.csci571.hw9;
+package com.nitinsurana.csci571.hw9.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,6 +15,11 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.nitinsurana.csci571.hw9.MyCallback;
+import com.nitinsurana.csci571.hw9.MyHttpRequest;
+import com.nitinsurana.csci571.hw9.MyLegislatorRecyclerViewAdapter;
+import com.nitinsurana.csci571.hw9.R;
+import com.nitinsurana.csci571.hw9.beans.Bean;
 import com.nitinsurana.csci571.hw9.beans.LegislatorBean;
 import com.nitinsurana.csci571.hw9.beans.LegislatorsJson;
 
@@ -39,7 +44,6 @@ public class LegislatorFragment extends Fragment implements MyCallback, View.OnC
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnFragmentInteractionListener mListener;
-    private LayoutInflater inflater;
 
     private LinkedHashMap<String, Integer> mapStateIndex = new LinkedHashMap<String, Integer>();
     private LinkedHashMap<String, Integer> mapHouseIndex = new LinkedHashMap<String, Integer>();
@@ -64,23 +68,19 @@ public class LegislatorFragment extends Fragment implements MyCallback, View.OnC
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        this.inflater = inflater;
         View view = inflater.inflate(R.layout.fragment_legislator_list, container, false);
 
         // Set the adapter
         Context context = view.getContext();
+        //State
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.state_list);
-//        if (mColumnCount <= 1) {
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-
+        //House
         recyclerView = (RecyclerView) view.findViewById(R.id.house_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-
+        //Senate
         recyclerView = (RecyclerView) view.findViewById(R.id.senate_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-//        } else {
-//            recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-//        }
 
         TabHost tabHost = (TabHost) view.findViewById(R.id.tab_host);
         tabHost.setup();
@@ -176,21 +176,9 @@ public class LegislatorFragment extends Fragment implements MyCallback, View.OnC
                 ((RecyclerView) getView().findViewById(R.id.senate_list)).scrollToPosition(mapSenateIndex.get(selectedIndex.getText()));
                 break;
         }
-
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void OnFragmentInteractionListener(LegislatorBean item);
+    public void toggleFavorite(View v) {
+
     }
 }
