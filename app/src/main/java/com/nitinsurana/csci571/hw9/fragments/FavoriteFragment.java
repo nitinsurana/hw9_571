@@ -20,6 +20,7 @@ import com.nitinsurana.csci571.hw9.MyHttpRequest;
 import com.nitinsurana.csci571.hw9.MyLegislatorRecyclerViewAdapter;
 import com.nitinsurana.csci571.hw9.R;
 import com.nitinsurana.csci571.hw9.beans.BillBean;
+import com.nitinsurana.csci571.hw9.beans.CommitteeBean;
 import com.nitinsurana.csci571.hw9.beans.LegislatorBean;
 import com.nitinsurana.csci571.hw9.beans.LegislatorsJson;
 
@@ -80,6 +81,11 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
         recyclerView = (RecyclerView) view.findViewById(R.id.bill_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(new MyBillRecyclerViewAdapter(lstBills, mListener));
+        //Committees
+        ArrayList<CommitteeBean> lstCommittees = new ArrayList<>(FavoriteDAO.committeeBeanMap.values());
+        recyclerView = (RecyclerView) view.findViewById(R.id.committee_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(new MyCommitteeRecyclerViewAdapter(lstCommittees, mListener));
         return view;
     }
 

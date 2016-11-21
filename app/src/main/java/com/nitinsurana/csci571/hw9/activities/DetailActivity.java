@@ -11,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.nitinsurana.csci571.hw9.FavoriteDAO;
+import com.nitinsurana.csci571.hw9.beans.CommitteeBean;
 import com.nitinsurana.csci571.hw9.fragments.BillDetailFragment;
 import com.nitinsurana.csci571.hw9.fragments.BillFragment;
+import com.nitinsurana.csci571.hw9.fragments.CommitteeDetailFragment;
 import com.nitinsurana.csci571.hw9.fragments.LegislatorDetailFragment;
 import com.nitinsurana.csci571.hw9.R;
 import com.nitinsurana.csci571.hw9.beans.Bean;
@@ -56,7 +58,20 @@ public class DetailActivity extends AppCompatActivity implements OnFragmentInter
             showLegislatorInfo();
         } else if (bean instanceof BillBean) {
             showBillInfo();
+        } else if (bean instanceof CommitteeBean) {
+            showCommitteeInfo();
         }
+    }
+
+    public void showCommitteeInfo() {
+        setTitle("Committee Info");
+
+        CommitteeBean bean = (CommitteeBean) this.bean;
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, CommitteeDetailFragment.newInstance(bean), "CommitteeDetailFragment")
+                .disallowAddToBackStack()
+                .commit();
     }
 
     public void showBillInfo() {
@@ -129,6 +144,11 @@ public class DetailActivity extends AppCompatActivity implements OnFragmentInter
         BillDetailFragment billFragment = (BillDetailFragment) getSupportFragmentManager().findFragmentByTag("BillDetailFragment");
         if (billFragment != null && billFragment.isVisible()) {
             billFragment.toggleFavorite(view);
+        }
+
+        CommitteeDetailFragment cFragment = (CommitteeDetailFragment) getSupportFragmentManager().findFragmentByTag("CommitteeDetailFragment");
+        if (cFragment != null && cFragment.isVisible()) {
+            cFragment.toggleFavorite(view);
         }
     }
 }

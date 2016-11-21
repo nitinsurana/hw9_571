@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.nitinsurana.csci571.hw9.R;
 import com.nitinsurana.csci571.hw9.beans.Bean;
 import com.nitinsurana.csci571.hw9.fragments.BillFragment;
+import com.nitinsurana.csci571.hw9.fragments.CommitteeFragment;
 import com.nitinsurana.csci571.hw9.fragments.FavoriteFragment;
 import com.nitinsurana.csci571.hw9.fragments.LegislatorFragment;
 import com.nitinsurana.csci571.hw9.fragments.OnFragmentInteractionListener;
@@ -105,14 +106,20 @@ public class MainActivity extends AppCompatActivity
 //                    .addToBackStack("backStackStateName")
                     .commit();
             setTitle("Legislators");
-        }
-        else if (id == R.id.nav_favorites) {
+        } else if (id == R.id.nav_favorites) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, new FavoriteFragment(), "FavoriteFragment")
 //                    .addToBackStack("backStackStateName")
                     .commit();
             setTitle("Favorites");
+        } else if (id == R.id.nav_committees) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new CommitteeFragment(), "CommitteeFragment")
+//                    .addToBackStack("backStackStateName")
+                    .commit();
+            setTitle("Committees");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
