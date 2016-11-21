@@ -100,6 +100,30 @@ public class BillDetailFragment extends Fragment {
         if (FavoriteDAO.billBeanMap.get(bean.getBill_id()) != null) {
             Picasso.with(img.getContext()).load(R.drawable.ss).into(img);
         }
+
+        txt = (TextView) view.findViewById(R.id.bill_url);
+        if (bean.getLast_version() != null && bean.getLast_version().get("urls") != null) {
+            String pdf = ((java.util.Map) bean.getLast_version().get("urls")).get("pdf").toString();
+            txt.setText(pdf);
+        } else {
+            txt.setText("N.A.");
+        }
+
+        txt = (TextView) view.findViewById(R.id.congress_url);
+        if (bean.getUrls() != null && bean.getUrls().get("congress") != null) {
+            String pdf = bean.getUrls().get("congress").toString();
+            txt.setText(pdf);
+        } else {
+            txt.setText("N.A.");
+        }
+
+        txt = (TextView) view.findViewById(R.id.version_status);
+        if (bean.getLast_version() != null && bean.getLast_version().get("version_name") != null) {
+            String pdf = bean.getLast_version().get("version_name").toString();
+            txt.setText(pdf);
+        } else {
+            txt.setText("N.A.");
+        }
         return view;
     }
 
