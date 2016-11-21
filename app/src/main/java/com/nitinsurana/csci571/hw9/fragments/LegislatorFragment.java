@@ -177,8 +177,4 @@ public class LegislatorFragment extends Fragment implements MyCallback, View.OnC
                 break;
         }
     }
-
-    public void toggleFavorite(View v) {
-
-    }
 }

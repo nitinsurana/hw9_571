@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nitinsurana.csci571.hw9.FavoriteDAO;
 import com.nitinsurana.csci571.hw9.R;
 import com.nitinsurana.csci571.hw9.beans.LegislatorBean;
 import com.nitinsurana.csci571.hw9.components.CustomProgress;
@@ -134,6 +135,11 @@ public class LegislatorDetailFragment extends Fragment {
         term = DateFormatUtils.format(bean.getBirthday(), "MMM dd, yyyy");
         txt.setText(term);
 
+        img = (ImageView) view.findViewById(R.id.fav);
+        if (FavoriteDAO.billBeanMap.get(bean.getBioguide_id()) != null) {
+            Picasso.with(img.getContext()).load(R.drawable.ss).into(img);
+        }
+
         return view;
     }
 
@@ -161,18 +167,14 @@ public class LegislatorDetailFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-//    public interface OnFragmentInteractionListener {
-//         TODO: Update argument type and name
-//        void onFragmentInteraction(Uri uri);
-//    }
+    public void toggleFavorite(View view){
+        ImageView img = (ImageView) view.findViewById(R.id.fav);
+        if (FavoriteDAO.legislatorBeanMap.get(bean.getBioguide_id()) == null) {
+            FavoriteDAO.legislatorBeanMap.put(bean.getBioguide_id(), bean);
+            Picasso.with(img.getContext()).load(R.drawable.ss).into(img);
+        } else {
+            FavoriteDAO.legislatorBeanMap.remove(bean.getBioguide_id());
+            Picasso.with(img.getContext()).load(R.drawable.s).into(img);
+        }
+    }
 }

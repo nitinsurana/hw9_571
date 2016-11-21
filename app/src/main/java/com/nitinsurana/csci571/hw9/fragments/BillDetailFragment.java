@@ -1,16 +1,20 @@
 package com.nitinsurana.csci571.hw9.fragments;
 
 import android.content.Context;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nitinsurana.csci571.hw9.FavoriteDAO;
 import com.nitinsurana.csci571.hw9.R;
 import com.nitinsurana.csci571.hw9.beans.BillBean;
+import com.squareup.picasso.Picasso;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -92,16 +96,12 @@ public class BillDetailFragment extends Fragment {
         txt = (TextView) view.findViewById(R.id.status);
         txt.setText(bean.getHistory().isActive() ? "Active" : "New");
 
-
+        ImageView img = (ImageView) view.findViewById(R.id.fav);
+        if (FavoriteDAO.billBeanMap.get(bean.getBill_id()) != null) {
+            Picasso.with(img.getContext()).load(R.drawable.ss).into(img);
+        }
         return view;
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
 
     @Override
     public void onAttach(Context context) {
@@ -120,4 +120,14 @@ public class BillDetailFragment extends Fragment {
         mListener = null;
     }
 
+    public void toggleFavorite(View view) {
+        ImageView img = (ImageView) view.findViewById(R.id.fav);
+        if (FavoriteDAO.billBeanMap.get(bean.getBill_id()) == null) {
+            FavoriteDAO.billBeanMap.put(bean.getBill_id(), bean);
+            Picasso.with(img.getContext()).load(R.drawable.ss).into(img);
+        } else {
+            FavoriteDAO.billBeanMap.remove(bean.getBill_id());
+            Picasso.with(img.getContext()).load(R.drawable.s).into(img);
+        }
+    }
 }

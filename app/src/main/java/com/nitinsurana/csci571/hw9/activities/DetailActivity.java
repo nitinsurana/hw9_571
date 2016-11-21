@@ -7,15 +7,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.nitinsurana.csci571.hw9.FavoriteDAO;
 import com.nitinsurana.csci571.hw9.fragments.BillDetailFragment;
+import com.nitinsurana.csci571.hw9.fragments.BillFragment;
 import com.nitinsurana.csci571.hw9.fragments.LegislatorDetailFragment;
 import com.nitinsurana.csci571.hw9.R;
 import com.nitinsurana.csci571.hw9.beans.Bean;
 import com.nitinsurana.csci571.hw9.beans.BillBean;
 import com.nitinsurana.csci571.hw9.beans.LegislatorBean;
+import com.nitinsurana.csci571.hw9.fragments.LegislatorFragment;
 import com.nitinsurana.csci571.hw9.fragments.OnFragmentInteractionListener;
+import com.squareup.picasso.Picasso;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -60,7 +65,7 @@ public class DetailActivity extends AppCompatActivity implements OnFragmentInter
         BillBean bean = (BillBean) this.bean;
 
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, BillDetailFragment.newInstance(bean),"BillDetailFragment")
+                .add(R.id.fragment_container, BillDetailFragment.newInstance(bean), "BillDetailFragment")
                 .disallowAddToBackStack()
                 .commit();
     }
@@ -113,5 +118,17 @@ public class DetailActivity extends AppCompatActivity implements OnFragmentInter
     @Override
     public void OnFragmentInteractionListener(Bean item) {
 
+    }
+
+    public void toggleFavorite(View view) {
+        LegislatorDetailFragment legFragment = (LegislatorDetailFragment) getSupportFragmentManager().findFragmentByTag("LegislatorDetailFragment");
+        if (legFragment != null && legFragment.isVisible()) {
+            legFragment.toggleFavorite(view);
+        }
+
+        BillDetailFragment billFragment = (BillDetailFragment) getSupportFragmentManager().findFragmentByTag("BillDetailFragment");
+        if (billFragment != null && billFragment.isVisible()) {
+            billFragment.toggleFavorite(view);
+        }
     }
 }

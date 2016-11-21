@@ -8,17 +8,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TabHost;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import com.nitinsurana.csci571.hw9.FavoriteDAO;
 import com.nitinsurana.csci571.hw9.MyBillRecyclerViewAdapter;
 import com.nitinsurana.csci571.hw9.MyCallback;
 import com.nitinsurana.csci571.hw9.MyHttpRequest;
 import com.nitinsurana.csci571.hw9.R;
 import com.nitinsurana.csci571.hw9.beans.BillBean;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -142,9 +145,5 @@ public class BillFragment extends Fragment implements MyCallback {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    public void toggleFavorite(View v){
-
     }
 }
