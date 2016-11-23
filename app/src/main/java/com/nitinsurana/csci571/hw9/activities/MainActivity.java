@@ -120,6 +120,9 @@ public class MainActivity extends AppCompatActivity
 //                    .addToBackStack("backStackStateName")
                     .commit();
             setTitle("Committees");
+        } else if (id == R.id.nav_about) {
+            Intent intent = new Intent(this, AboutMeActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
