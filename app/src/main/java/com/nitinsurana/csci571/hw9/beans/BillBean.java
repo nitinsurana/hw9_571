@@ -1,5 +1,6 @@
 package com.nitinsurana.csci571.hw9.beans;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.io.Serializable;
@@ -27,6 +28,22 @@ public class BillBean extends Bean implements Serializable {
     public void setIntroduced_on(String d) throws ParseException {
         this.introduced_on = DateUtils.parseDate(d, "YYYY-MM-DD");
     }
+
+    public String getBill_id() {
+        return bill_id.toUpperCase();
+    }
+
+    public String getBill_type() {
+        return bill_type.toUpperCase();
+    }
+
+    public String getChamber() {
+        if (StringUtils.isNotBlank(chamber)) {
+            return StringUtils.capitalize(chamber);
+        }
+        return chamber;
+    }
+
 //    "sres613-114"
 //    bill_type
 //    :

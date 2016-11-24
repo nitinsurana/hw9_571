@@ -7,17 +7,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">#000000</item>
 
-        <!--<item name="android:tabWidgetStyle">@style/LightTabWidget</item>-->
+        <item name="android:textColor">@android:color/black</item>
+
     </style>
 
-
-    <!--<style name="AppTheme" parent="AppBaseTheme">-->
-        <!--<item name="android:tabWidgetStyle">@style/LightTabWidget</item>-->
-    <!--</style>-->
-
-    <!--<style name="LightTabWidget" parent="@android:style/Widget.TabWidget">-->
-        <!--<item name="android:tabStripEnabled">false</item>-->
-    <!--</style>-->
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

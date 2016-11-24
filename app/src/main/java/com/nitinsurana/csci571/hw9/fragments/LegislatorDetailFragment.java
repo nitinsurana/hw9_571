@@ -137,7 +137,7 @@ public class LegislatorDetailFragment extends Fragment {
         txt.setText(term);
 
         img = (ImageView) view.findViewById(R.id.fav);
-        if (FavoriteDAO.billBeanMap.get(bean.getBioguide_id()) != null) {
+        if (FavoriteDAO.legislatorBeanMap.get(bean.getBioguide_id()) != null) {
             Picasso.with(img.getContext()).load(R.drawable.ss).into(img);
         }
 
