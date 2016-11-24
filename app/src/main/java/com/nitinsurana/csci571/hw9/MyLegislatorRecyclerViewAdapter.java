@@ -12,6 +12,8 @@ import com.nitinsurana.csci571.hw9.fragments.LegislatorFragment;
 import com.nitinsurana.csci571.hw9.fragments.OnFragmentInteractionListener;
 import com.squareup.picasso.Picasso;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +46,9 @@ public class MyLegislatorRecyclerViewAdapter extends RecyclerView.Adapter<MyLegi
         holder.mPartyView.setText("(" + mValues.get(position).getParty() + ")");
         holder.mStateView.setText(mValues.get(position).getState_name());
         holder.mDistrictView.setText(mValues.get(position).getDistrict());
+        if (StringUtils.isBlank(mValues.get(position).getDistrict())) {
+            holder.mDistrictDividerView.setVisibility(View.INVISIBLE);
+        }
         Picasso.with(holder.mImageView.getContext())
                 .load(mValues.get(position).getImageUrl())
 //                .resize(100, 150)
@@ -74,6 +79,7 @@ public class MyLegislatorRecyclerViewAdapter extends RecyclerView.Adapter<MyLegi
         public final TextView mStateView;
         public final TextView mDistrictView;
         public final ImageView mImageView;
+        public final TextView mDistrictDividerView;
         public LegislatorBean mItem;
 
         public ViewHolder(View view) {
@@ -83,6 +89,7 @@ public class MyLegislatorRecyclerViewAdapter extends RecyclerView.Adapter<MyLegi
             mPartyView = (TextView) view.findViewById(R.id.party);
             mStateView = (TextView) view.findViewById(R.id.state);
             mDistrictView = (TextView) view.findViewById(R.id.district);
+            mDistrictDividerView = (TextView) view.findViewById(R.id.district_divider);
             mImageView = (ImageView) view.findViewById(R.id.img);
         }
 

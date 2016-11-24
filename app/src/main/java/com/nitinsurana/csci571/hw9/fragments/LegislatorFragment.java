@@ -169,6 +169,7 @@ public class LegislatorFragment extends Fragment implements MyCallback, View.OnC
             textView = (TextView) getActivity().getLayoutInflater().inflate(
                     R.layout.side_index_item, null);
             textView.setText(index);
+            textView.setTextSize(8.5f);
             textView.setOnClickListener(this);
             textView.setTag(side_index_id);
             indexLayout.addView(textView);

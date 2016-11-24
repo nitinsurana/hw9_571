@@ -41,6 +41,13 @@ public class LegislatorBean extends Bean implements Serializable {
         this.term_end = DateUtils.parseDate(term_end, "YYYY-MM-DD");
     }
 
+    public String getChamber() {
+        if (StringUtils.isNotBlank(chamber)) {
+            return StringUtils.capitalize(chamber);
+        }
+        return chamber;
+    }
+
     public String getFullname() {
         return last_name + ", " + first_name;
     }

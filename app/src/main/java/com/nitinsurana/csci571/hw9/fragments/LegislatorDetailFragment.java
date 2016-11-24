@@ -80,13 +80,13 @@ public class LegislatorDetailFragment extends Fragment {
         ImageView img = (ImageView) view.findViewById(R.id.party_img);
         TextView txt = (TextView) view.findViewById(R.id.party_title);
         if (bean.getParty().equalsIgnoreCase("r")) {
-            Picasso.with(img.getContext()).load(R.drawable.r).resize(30, 30).into(img);
+            Picasso.with(img.getContext()).load(R.drawable.r).into(img);
             txt.setText(" Republican");
         } else if (bean.getParty().equalsIgnoreCase("d")) {
-            Picasso.with(img.getContext()).load(R.drawable.d).resize(30, 30).into(img);
+            Picasso.with(img.getContext()).load(R.drawable.d).into(img);
             txt.setText(" Democrat");
         } else {
-            Picasso.with(img.getContext()).load(R.drawable.i).resize(30, 30).into(img);
+            Picasso.with(img.getContext()).load(R.drawable.i).into(img);
             txt.setText(" Independent");
         }
 
