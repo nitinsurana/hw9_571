@@ -13,6 +13,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.nitinsurana.csci571.hw9.AppUtils;
 import com.nitinsurana.csci571.hw9.FavoriteDAO;
 import com.nitinsurana.csci571.hw9.MyBillRecyclerViewAdapter;
 import com.nitinsurana.csci571.hw9.MyCallback;
@@ -61,12 +62,20 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorite_list, container, false);
 
-        TabHost tabHost = (TabHost) view.findViewById(R.id.tab_host);
+        final TabHost tabHost = (TabHost) view.findViewById(R.id.tab_host);
         tabHost.setup();
 
         tabHost.addTab(tabHost.newTabSpec("Legislators").setContent(R.id.tab_one_container).setIndicator("Legislators"));
         tabHost.addTab(tabHost.newTabSpec("Bills").setContent(R.id.tab_two_container).setIndicator("Bills"));
         tabHost.addTab(tabHost.newTabSpec("Committees").setContent(R.id.tab_three_container).setIndicator("Committees"));
+
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                AppUtils.boldTabHost(tabHost);
+            }
+        });
+        AppUtils.boldTabHost(tabHost);
 
         // Set the adapter
         Context context = view.getContext();

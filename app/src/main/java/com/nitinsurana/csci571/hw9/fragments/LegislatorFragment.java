@@ -1,6 +1,7 @@
 package com.nitinsurana.csci571.hw9.fragments;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,6 +16,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.nitinsurana.csci571.hw9.AppUtils;
 import com.nitinsurana.csci571.hw9.MyCallback;
 import com.nitinsurana.csci571.hw9.MyHttpRequest;
 import com.nitinsurana.csci571.hw9.MyLegislatorRecyclerViewAdapter;
@@ -82,17 +84,28 @@ public class LegislatorFragment extends Fragment implements MyCallback, View.OnC
         recyclerView = (RecyclerView) view.findViewById(R.id.senate_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-        TabHost tabHost = (TabHost) view.findViewById(R.id.tab_host);
+        final TabHost tabHost = (TabHost) view.findViewById(R.id.tab_host);
         tabHost.setup();
 
         tabHost.addTab(tabHost.newTabSpec("By States").setContent(R.id.tab_one_container).setIndicator("By States"));
         tabHost.addTab(tabHost.newTabSpec("House").setContent(R.id.tab_two_container).setIndicator("House"));
         tabHost.addTab(tabHost.newTabSpec("Senate").setContent(R.id.tab_three_container).setIndicator("Senate"));
 
+
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                AppUtils.boldTabHost(tabHost);
+            }
+        });
+        AppUtils.boldTabHost(tabHost);
+
         MyHttpRequest myHttpRequest = new MyHttpRequest(this);
         myHttpRequest.execute("http://hw8-env.5mmquaicpi.us-west-2.elasticbeanstalk.com/api.php?submit=true&db=Legislators&keyword=&chamber=&page=undefined");
         return view;
     }
+
+
 
 
     @Override

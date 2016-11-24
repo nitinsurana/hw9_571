@@ -13,6 +13,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.nitinsurana.csci571.hw9.AppUtils;
 import com.nitinsurana.csci571.hw9.MyCallback;
 import com.nitinsurana.csci571.hw9.MyHttpRequest;
 import com.nitinsurana.csci571.hw9.MyLegislatorRecyclerViewAdapter;
@@ -73,12 +74,20 @@ public class CommitteeFragment extends Fragment implements MyCallback {
         recyclerView = (RecyclerView) view.findViewById(R.id.joint_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-        TabHost tabHost = (TabHost) view.findViewById(R.id.tab_host);
+        final TabHost tabHost = (TabHost) view.findViewById(R.id.tab_host);
         tabHost.setup();
 
         tabHost.addTab(tabHost.newTabSpec("House").setContent(R.id.tab_one_container).setIndicator("House"));
         tabHost.addTab(tabHost.newTabSpec("Senate").setContent(R.id.tab_two_container).setIndicator("Senate"));
         tabHost.addTab(tabHost.newTabSpec("Joint").setContent(R.id.tab_three_container).setIndicator("Joint"));
+
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                AppUtils.boldTabHost(tabHost);
+            }
+        });
+        AppUtils.boldTabHost(tabHost);
 
         MyHttpRequest myHttpRequest = new MyHttpRequest(this);
         myHttpRequest.execute("http://hw8-env.5mmquaicpi.us-west-2.elasticbeanstalk.com/api.php?submit=true&db=Committees&keyword=&chamber=&page=undefined");

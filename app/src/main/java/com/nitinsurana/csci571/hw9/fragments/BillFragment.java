@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import com.nitinsurana.csci571.hw9.AppUtils;
 import com.nitinsurana.csci571.hw9.FavoriteDAO;
 import com.nitinsurana.csci571.hw9.MyBillRecyclerViewAdapter;
 import com.nitinsurana.csci571.hw9.MyCallback;
@@ -93,11 +94,19 @@ public class BillFragment extends Fragment implements MyCallback {
         recyclerView = (RecyclerView) view.findViewById(R.id.new_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-        TabHost tabHost = (TabHost) view.findViewById(R.id.tab_host);
+        final TabHost tabHost = (TabHost) view.findViewById(R.id.tab_host);
         tabHost.setup();
 
         tabHost.addTab(tabHost.newTabSpec("Active").setContent(R.id.tab_one_container).setIndicator("Active"));
         tabHost.addTab(tabHost.newTabSpec("New").setContent(R.id.tab_two_container).setIndicator("New"));
+
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                AppUtils.boldTabHost(tabHost);
+            }
+        });
+        AppUtils.boldTabHost(tabHost);
 
         MyHttpRequest myHttpRequest = new MyHttpRequest(this);
         myHttpRequest.execute("http://hw8-env.5mmquaicpi.us-west-2.elasticbeanstalk.com/api.php?submit=true&db=Bills");

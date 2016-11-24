@@ -126,8 +126,7 @@
                             android:layout_height="fill_parent"
                             android:background="#c3c3c3"
                             android:gravity="center_horizontal"
-                            android:orientation="vertical">
-                        </LinearLayout>
+                            android:orientation="vertical"></LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </FrameLayout>
