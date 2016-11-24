@@ -5,15 +5,15 @@
         <item
             android:checked="true"
             android:id="@+id/nav_legislators"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_legislators"
             android:title="Legislators" />
         <item
             android:id="@+id/nav_bills"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_menu_bills"
             android:title="Bills" />
         <item
             android:id="@+id/nav_committees"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_menu_committees"
             android:title="Committees" />
         <item
             android:id="@+id/nav_favorites"
