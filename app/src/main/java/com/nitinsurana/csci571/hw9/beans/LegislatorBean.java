@@ -84,7 +84,7 @@ public class LegislatorBean extends Bean implements Serializable {
         if (StringUtils.isNotBlank(district)) {
             return "District " + district;
         }
-        return "";
+        return "N.A.";
     }
 //    bioguide_id
 //    :
