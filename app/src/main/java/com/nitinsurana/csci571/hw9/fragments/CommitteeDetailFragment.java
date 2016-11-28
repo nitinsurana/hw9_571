@@ -79,9 +79,9 @@ public class CommitteeDetailFragment extends Fragment {
 
         ImageView img = (ImageView) view.findViewById(R.id.chamber_img);
         if (bean.getChamber().equalsIgnoreCase("house")) {
-            Picasso.with(img.getContext()).load(R.drawable.h).into(img);
+            Picasso.with(img.getContext()).load(R.drawable.h).priority(Picasso.Priority.HIGH).into(img);
         } else {
-            Picasso.with(img.getContext()).load(R.drawable.senate).into(img);
+            Picasso.with(img.getContext()).load(R.drawable.senate).priority(Picasso.Priority.HIGH).into(img);
         }
 
         txt = (TextView) view.findViewById(R.id.parent_committee);
@@ -95,7 +95,7 @@ public class CommitteeDetailFragment extends Fragment {
 
         img = (ImageView) view.findViewById(R.id.fav);
         if (FavoriteDAO.committeeBeanMap.get(bean.getCommittee_id()) != null) {
-            Picasso.with(img.getContext()).load(R.drawable.ss).into(img);
+            Picasso.with(img.getContext()).load(R.drawable.ss).priority(Picasso.Priority.HIGH).into(img);
         }
 
         return view;
@@ -122,10 +122,10 @@ public class CommitteeDetailFragment extends Fragment {
         ImageView img = (ImageView) view.findViewById(R.id.fav);
         if (FavoriteDAO.committeeBeanMap.get(bean.getCommittee_id()) == null) {
             FavoriteDAO.committeeBeanMap.put(bean.getCommittee_id(), bean);
-            Picasso.with(img.getContext()).load(R.drawable.ss).into(img);
+            Picasso.with(img.getContext()).load(R.drawable.ss).priority(Picasso.Priority.HIGH).into(img);
         } else {
             FavoriteDAO.committeeBeanMap.remove(bean.getCommittee_id());
-            Picasso.with(img.getContext()).load(R.drawable.s).into(img);
+            Picasso.with(img.getContext()).load(R.drawable.s).priority(Picasso.Priority.HIGH).into(img);
         }
     }
 }

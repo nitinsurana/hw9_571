@@ -80,13 +80,13 @@ public class LegislatorDetailFragment extends Fragment {
         ImageView img = (ImageView) view.findViewById(R.id.party_img);
         TextView txt = (TextView) view.findViewById(R.id.party_title);
         if (bean.getParty().equalsIgnoreCase("r")) {
-            Picasso.with(img.getContext()).load(R.drawable.r).into(img);
+            Picasso.with(img.getContext()).load(R.drawable.r).priority(Picasso.Priority.HIGH).into(img);
             txt.setText(" Republican");
         } else if (bean.getParty().equalsIgnoreCase("d")) {
-            Picasso.with(img.getContext()).load(R.drawable.d).into(img);
+            Picasso.with(img.getContext()).load(R.drawable.d).priority(Picasso.Priority.HIGH).into(img);
             txt.setText(" Democrat");
         } else {
-            Picasso.with(img.getContext()).load(R.drawable.i).into(img);
+            Picasso.with(img.getContext()).load(R.drawable.i).priority(Picasso.Priority.HIGH).into(img);
             txt.setText(" Independent");
         }
 
@@ -94,6 +94,7 @@ public class LegislatorDetailFragment extends Fragment {
         Picasso.with(img.getContext())
                 .load(bean.getImageUrl())
                 .resize(180, 200)
+                .priority(Picasso.Priority.HIGH)
                 .into(img);
 
         TextView name = (TextView) view.findViewById(R.id.name);
@@ -138,7 +139,7 @@ public class LegislatorDetailFragment extends Fragment {
 
         img = (ImageView) view.findViewById(R.id.fav);
         if (FavoriteDAO.legislatorBeanMap.get(bean.getBioguide_id()) != null) {
-            Picasso.with(img.getContext()).load(R.drawable.ss).into(img);
+            Picasso.with(img.getContext()).load(R.drawable.ss).priority(Picasso.Priority.HIGH).into(img);
         }
 
         return view;
@@ -172,10 +173,10 @@ public class LegislatorDetailFragment extends Fragment {
         ImageView img = (ImageView) view.findViewById(R.id.fav);
         if (FavoriteDAO.legislatorBeanMap.get(bean.getBioguide_id()) == null) {
             FavoriteDAO.legislatorBeanMap.put(bean.getBioguide_id(), bean);
-            Picasso.with(img.getContext()).load(R.drawable.ss).into(img);
+            Picasso.with(img.getContext()).load(R.drawable.ss).priority(Picasso.Priority.HIGH).into(img);
         } else {
             FavoriteDAO.legislatorBeanMap.remove(bean.getBioguide_id());
-            Picasso.with(img.getContext()).load(R.drawable.s).into(img);
+            Picasso.with(img.getContext()).load(R.drawable.s).priority(Picasso.Priority.HIGH).into(img);
         }
     }
 }

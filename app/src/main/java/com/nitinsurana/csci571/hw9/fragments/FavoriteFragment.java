@@ -77,6 +77,14 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
         });
         AppUtils.boldTabHost(tabHost);
 
+        reRenderList(view);
+        return view;
+    }
+
+    public void reRenderList(View view) {
+        if (view == null) {
+            view = getView();
+        }
         // Set the adapter
         Context context = view.getContext();
         //Legislators
@@ -95,7 +103,6 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
         recyclerView = (RecyclerView) view.findViewById(R.id.committee_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(new MyCommitteeRecyclerViewAdapter(lstCommittees, mListener));
-        return view;
     }
 
 
@@ -129,6 +136,7 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
 
     private void displayIndex(View view, LinkedHashMap<String, Integer> map, int side_index_id) {
         LinearLayout indexLayout = (LinearLayout) view.findViewById(side_index_id);
+        indexLayout.removeAllViews();
 
         TextView textView;
         TreeSet<String> indexList = new TreeSet<>(map.keySet());

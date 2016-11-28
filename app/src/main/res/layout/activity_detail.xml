@@ -5,6 +5,7 @@
     android:id="@+id/activity_legislator_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="com.nitinsurana.csci571.hw9.activities.DetailActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -25,5 +26,5 @@
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_height="wrap_content"></FrameLayout>
 </RelativeLayout>

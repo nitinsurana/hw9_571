@@ -28,8 +28,15 @@ import com.squareup.picasso.Picasso;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnFragmentInteractionListener {
 
-//    public static Picasso picasso;
-//    public static OkHttpClient okHttpClient;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FavoriteFragment myFragment = (FavoriteFragment) getSupportFragmentManager().findFragmentByTag("FavoriteFragment");
+        if (myFragment != null && myFragment.isVisible()) {
+            myFragment.reRenderList(null);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

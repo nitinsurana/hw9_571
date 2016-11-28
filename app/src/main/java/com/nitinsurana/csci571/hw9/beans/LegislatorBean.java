@@ -22,12 +22,29 @@ public class LegislatorBean extends Bean implements Serializable {
     private String party, oc_email, title;
     private String state_name, district;
     private String twitter_id, facebook_id, website;
-
     private String phone, office, fax, state;
-
-    //    @Getter
-//    @Setter(AccessLevel.NONE)
     private Date term_start, term_end, birthday;
+
+    public String getOffice() {
+        if (StringUtils.isNotBlank(office)) {
+            return office;
+        }
+        return "N.A.";
+    }
+
+    public String getPhone() {
+        if (StringUtils.isNotBlank(phone)) {
+            return phone;
+        }
+        return "N.A.";
+    }
+
+    public String getFax() {
+        if (StringUtils.isNotBlank(fax)) {
+            return fax;
+        }
+        return "N.A.";
+    }
 
     public void setBirthday(String birthday) throws ParseException {
         this.birthday = DateUtils.parseDate(birthday, "YYYY-MM-DD");
@@ -46,6 +63,13 @@ public class LegislatorBean extends Bean implements Serializable {
             return StringUtils.capitalize(chamber);
         }
         return chamber;
+    }
+
+    public String getOc_email() {
+        if (StringUtils.isNotBlank(oc_email)) {
+            return oc_email;
+        }
+        return "N.A.";
     }
 
     public String getFullname() {

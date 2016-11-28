@@ -98,7 +98,7 @@ public class BillDetailFragment extends Fragment {
 
         ImageView img = (ImageView) view.findViewById(R.id.fav);
         if (FavoriteDAO.billBeanMap.get(bean.getBill_id()) != null) {
-            Picasso.with(img.getContext()).load(R.drawable.ss).into(img);
+            Picasso.with(img.getContext()).load(R.drawable.ss).priority(Picasso.Priority.HIGH).into(img);
         }
 
         txt = (TextView) view.findViewById(R.id.bill_url);
@@ -148,10 +148,10 @@ public class BillDetailFragment extends Fragment {
         ImageView img = (ImageView) view.findViewById(R.id.fav);
         if (FavoriteDAO.billBeanMap.get(bean.getBill_id()) == null) {
             FavoriteDAO.billBeanMap.put(bean.getBill_id(), bean);
-            Picasso.with(img.getContext()).load(R.drawable.ss).into(img);
+            Picasso.with(img.getContext()).load(R.drawable.ss).priority(Picasso.Priority.HIGH).into(img);
         } else {
             FavoriteDAO.billBeanMap.remove(bean.getBill_id());
-            Picasso.with(img.getContext()).load(R.drawable.s).into(img);
+            Picasso.with(img.getContext()).load(R.drawable.s).priority(Picasso.Priority.HIGH).into(img);
         }
     }
 }
