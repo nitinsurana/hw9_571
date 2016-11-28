@@ -106,8 +106,6 @@ public class LegislatorFragment extends Fragment implements MyCallback, View.OnC
     }
 
 
-
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -154,8 +152,9 @@ public class LegislatorFragment extends Fragment implements MyCallback, View.OnC
                 index = bean.getLast_name().substring(0, 1);
             }
 
-            if (mapIndex.get(index) == null)
+            if (mapIndex.get(index) == null) {
                 mapIndex.put(index, i);
+            }
         }
         return mapIndex;
     }

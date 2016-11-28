@@ -26,6 +26,8 @@ import com.nitinsurana.csci571.hw9.beans.LegislatorBean;
 import com.nitinsurana.csci571.hw9.beans.LegislatorsJson;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.TreeSet;
 
@@ -89,17 +91,36 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
         Context context = view.getContext();
         //Legislators
         ArrayList<LegislatorBean> lstLegislators = new ArrayList<>(FavoriteDAO.legislatorBeanMap.values());
+        Collections.sort(lstLegislators, new Comparator<LegislatorBean>() {
+            @Override
+            public int compare(LegislatorBean o1, LegislatorBean o2) {
+                return o1.getLast_name().compareTo(o2.getLast_name());
+            }
+        });
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.legislator_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(new MyLegislatorRecyclerViewAdapter(lstLegislators, mListener));
         displayIndex(view, getIndexList(mapLegislatorIndex, lstLegislators), R.id.side_index);
         //Bills
         ArrayList<BillBean> lstBills = new ArrayList<>(FavoriteDAO.billBeanMap.values());
+        Collections.sort(lstBills, new Comparator<BillBean>() {
+            @Override
+            public int compare(BillBean o1, BillBean o2) {
+                return o1.getIntroduced_on().compareTo(o2.getIntroduced_on());
+            }
+        });
+        Collections.reverse(lstBills);
         recyclerView = (RecyclerView) view.findViewById(R.id.bill_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(new MyBillRecyclerViewAdapter(lstBills, mListener));
         //Committees
         ArrayList<CommitteeBean> lstCommittees = new ArrayList<>(FavoriteDAO.committeeBeanMap.values());
+        Collections.sort(lstCommittees, new Comparator<CommitteeBean>() {
+            @Override
+            public int compare(CommitteeBean o1, CommitteeBean o2) {
+                return o1.getCommittee_id().compareTo(o2.getCommittee_id());
+            }
+        });
         recyclerView = (RecyclerView) view.findViewById(R.id.committee_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(new MyCommitteeRecyclerViewAdapter(lstCommittees, mListener));

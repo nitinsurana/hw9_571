@@ -123,10 +123,6 @@ public class LegislatorDetailFragment extends Fragment {
         float t = (float) ((1.0 * new Date().getTime() - bean.getTerm_start().getTime()) / (1.0 * bean.getTerm_end().getTime() - bean.getTerm_start().getTime()));
         ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.term);
         progressBar.setProgress((int) (t * 100));
-//        progressBar.getIndeterminateDrawable().setColorFilter(0x827A6A, PorterDuff.Mode.SRC_IN);
-//        progressBar.getProgressDrawable().setColorFilter(0xF0A84F, PorterDuff.Mode.SRC_IN);
-//        progressBar.setProgressTintList(ColorStateList.valueOf(0x827A6A));
-//        progressBar.setIndeterminateTintList(ColorStateList.valueOf(0xF0A84F));
 
         txt = (TextView) view.findViewById(R.id.term_txt);
         txt.setText((int)( t * 100) + "%               ");
@@ -151,13 +147,6 @@ public class LegislatorDetailFragment extends Fragment {
 
         return view;
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.OnFragmentInteractionListener(nul);
-//        }
-//    }
 
     @Override
     public void onAttach(Context context) {
