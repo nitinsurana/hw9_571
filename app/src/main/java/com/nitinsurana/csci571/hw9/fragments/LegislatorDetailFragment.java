@@ -1,6 +1,9 @@
 package com.nitinsurana.csci571.hw9.fragments;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -120,6 +123,10 @@ public class LegislatorDetailFragment extends Fragment {
         float t = (float) ((1.0 * new Date().getTime() - bean.getTerm_start().getTime()) / (1.0 * bean.getTerm_end().getTime() - bean.getTerm_start().getTime()));
         ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.term);
         progressBar.setProgress((int) (t * 100));
+//        progressBar.getIndeterminateDrawable().setColorFilter(0x827A6A, PorterDuff.Mode.SRC_IN);
+//        progressBar.getProgressDrawable().setColorFilter(0xF0A84F, PorterDuff.Mode.SRC_IN);
+//        progressBar.setProgressTintList(ColorStateList.valueOf(0x827A6A));
+//        progressBar.setIndeterminateTintList(ColorStateList.valueOf(0xF0A84F));
 
         txt = (TextView) view.findViewById(R.id.term_txt);
         txt.setText((int)( t * 100) + "%               ");
