@@ -14,14 +14,12 @@ public class AppUtils {
         for (int i = 0; i < tabHost.getTabWidget().getChildCount(); i++) {
             TextView tv = (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
             tv.setTypeface(Typeface.DEFAULT);
-//            tv.setBackgroundResource(R.drawable.transparent);
+            tv.setTextSize(13.0f);
         }
         TextView textView = (TextView) tabHost.getTabWidget().getChildAt(tabHost.getCurrentTab())
                 .findViewById(android.R.id.title);
         textView.setTypeface(Typeface.DEFAULT_BOLD);
 
         tabHost.getTabWidget().setStripEnabled(false);
-//        tabHost.getTabContentView().setSelectedTabIndicatorHeight();
-//        tabHost.getTabWidget().setDividerDrawable(R.drawable.logo);
     }
 }

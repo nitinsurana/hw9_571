@@ -26,7 +26,7 @@ public class CommitteeJson implements Serializable {
         Collections.sort(lst, new Comparator<CommitteeBean>() {
             @Override
             public int compare(CommitteeBean o1, CommitteeBean o2) {
-                return o1.getCommittee_id().compareTo(o2.getCommittee_id());
+                return o1.getName().compareTo(o2.getName());
             }
         });
         return lst;
@@ -42,7 +42,7 @@ public class CommitteeJson implements Serializable {
         Collections.sort(lst, new Comparator<CommitteeBean>() {
             @Override
             public int compare(CommitteeBean o1, CommitteeBean o2) {
-                return o1.getCommittee_id().compareTo(o2.getCommittee_id());
+                return o1.getName().compareTo(o2.getName());
             }
         });
         return lst;
@@ -58,7 +58,7 @@ public class CommitteeJson implements Serializable {
         Collections.sort(lst, new Comparator<CommitteeBean>() {
             @Override
             public int compare(CommitteeBean o1, CommitteeBean o2) {
-                return o1.getCommittee_id().compareTo(o2.getCommittee_id());
+                return o1.getName().compareTo(o2.getName());
             }
         });
         return lst;

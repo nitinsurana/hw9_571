@@ -118,7 +118,7 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
         Collections.sort(lstCommittees, new Comparator<CommitteeBean>() {
             @Override
             public int compare(CommitteeBean o1, CommitteeBean o2) {
-                return o1.getCommittee_id().compareTo(o2.getCommittee_id());
+                return o1.getName().compareTo(o2.getName());
             }
         });
         recyclerView = (RecyclerView) view.findViewById(R.id.committee_list);
@@ -176,7 +176,8 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
         TextView selectedIndex = (TextView) view;
         switch (Integer.valueOf(view.getTag().toString())) {
             case R.id.side_index:
-                ((RecyclerView) getView().findViewById(R.id.legislator_list)).scrollToPosition(mapLegislatorIndex.get(selectedIndex.getText()));
+                LinearLayoutManager lllm = (LinearLayoutManager) ((RecyclerView) getView().findViewById(R.id.legislator_list)).getLayoutManager();
+                lllm.scrollToPositionWithOffset(mapLegislatorIndex.get(selectedIndex.getText()), 0);
                 break;
         }
     }

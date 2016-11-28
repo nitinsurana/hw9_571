@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -178,15 +179,19 @@ public class LegislatorFragment extends Fragment implements MyCallback, View.OnC
     @Override
     public void onClick(View view) {
         TextView selectedIndex = (TextView) view;
+        LinearLayoutManager llm = null;
         switch (Integer.valueOf(view.getTag().toString())) {
             case R.id.state_side_index:
-                ((RecyclerView) getView().findViewById(R.id.state_list)).scrollToPosition(mapStateIndex.get(selectedIndex.getText()));
+                llm = (LinearLayoutManager) ((RecyclerView) getView().findViewById(R.id.state_list)).getLayoutManager();
+                llm.scrollToPositionWithOffset(mapStateIndex.get(selectedIndex.getText()), 0);
                 break;
             case R.id.house_side_index:
-                ((RecyclerView) getView().findViewById(R.id.house_list)).scrollToPosition(mapHouseIndex.get(selectedIndex.getText()));
+                llm = (LinearLayoutManager) ((RecyclerView) getView().findViewById(R.id.house_list)).getLayoutManager();
+                llm.scrollToPositionWithOffset(mapHouseIndex.get(selectedIndex.getText()), 0);
                 break;
             case R.id.senate_side_index:
-                ((RecyclerView) getView().findViewById(R.id.senate_list)).scrollToPosition(mapSenateIndex.get(selectedIndex.getText()));
+                llm = (LinearLayoutManager) ((RecyclerView) getView().findViewById(R.id.senate_list)).getLayoutManager();
+                llm.scrollToPositionWithOffset(mapSenateIndex.get(selectedIndex.getText()),0);
                 break;
         }
     }
